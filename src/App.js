@@ -1,13 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import logo from "./logo.svg";
+import BackendData from "./BackendData";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [data1, setData1] = useState();
+  const handleData1 = (data) => {
+    setData1(data);
+  };
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Helloooooo <code>there</code> World
         </p>
         <a
           className="App-link"
@@ -15,11 +21,16 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Learn Full Stack
         </a>
       </header>
+      <h4>Backend Data: </h4>
+
+      <BackendData handleData1={handleData1} />
+      <h4>data1</h4>
+      <p>{data1}</p>
     </div>
   );
-}
+};
 
 export default App;

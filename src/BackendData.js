@@ -4,15 +4,19 @@ const BackendData = ({ handleData1 }) => {
   const [data, setData] = useState("Test");
 
   useEffect(() => {
-    fetch("http://localhost:3001", { method: "GET" })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("inside 2nd then");
-        console.log(data);
-        setData(data);
-        handleData1(data);
-      })
-      .catch((err) => `${err} has occured`);
+    const fetchDataFromserver = async () => {
+      try {
+        const backendResponse = await fetch("http://localhost:3001", {
+          method: "GET",
+        });
+        const dataReceived = await backendResponse.json();
+        setData(dataReceived);
+        handleData1(dataReceived);
+      } catch (err) {
+        return `${err} has occured`;
+      }
+    };
+    fetchDataFromserver();
   }, [handleData1]);
 
   return (
